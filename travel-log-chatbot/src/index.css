@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f8f8f8;
+}
+
+.app {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.5rem 1.2rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.results .entry {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.results .entry:last-child {
+  border-bottom: none;
+}
+
+.results small {
+  color: gray;
+}
