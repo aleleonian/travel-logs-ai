@@ -10,17 +10,25 @@ export default function App() {
     e.preventDefault();
     setLoading(true);
     setResults([]);
-    const res = await fetch('http://localhost:3001/query', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question })
-    });
+    let res;
+    try {
+      res = await fetch('http://localhost:3001/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question })
+      })
+    }
+    catch (error) {
+      const data = {};
+      data.answer = error;
+      setResults(data);
+      setLoading(false);
+      return;
+    }
     const data = await res.json();
     setResults(data);
     setLoading(false);
   }
-
-  debugger;
 
   return (
     <div className="app">
@@ -36,17 +44,13 @@ export default function App() {
       </form>
       {loading && <p>Loading...</p>}
       <div className="results">
-        {/* {results.map((entry, idx) => (
-          <div key={idx} className="entry">
-            <h3>{entry.date} — {entry.country}</h3>
-            <p>{entry.text}</p>
-            <small>Similarity: {entry.similarity.toFixed(3)}</small>
-          </div>
-        ))} */}
         {
           results.answer &&
-          <textarea cols="100" rows="10">{results.answer}</textarea>
-        }
+          <textarea
+            style={{ width: '100%', height: '300px' }}
+            value={results.answer}
+            onChange={(e) => setText(e.target.value)}
+          />}
       </div>
     </div >
   );
